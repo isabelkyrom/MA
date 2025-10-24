@@ -1,4 +1,4 @@
-name: Notificar cambio de estado (Kanban clásico)
+name: Notificar cambio de estado (Kanban clásico con mención)
 
 on:
   issues:
@@ -11,10 +11,11 @@ jobs:
       - name: Mostrar información
         run: echo "La issue ${{ github.event.issue.number }} cambió de etiqueta."
 
-      - name: Comentar en la issue
+      - name: Comentar en la issue con mención
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            🔔 La tarea *#${{ github.event.issue.number }}* cambió su estado a *${{ github.event.label.name }}*.
+            🔔 **@IsabelKyra**, esta tarea cambió su estado a **${{ github.event.label.name }}**.
+            _(Notificación automática por movimiento en el tablero Kanban.)_
